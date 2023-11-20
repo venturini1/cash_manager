@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Cash_manager</string>
+    <string name="ctn_desc_password_icon_display">Display the password</string>
+    <string name="ctn_desc_password_icon_hide">Hide the password</string>
+    <string name="ctn_desc_login_with_facebook">Login with facebook</string>
+    <string name="ctn_desc_login_with_apple">Login with apple</string>
+    <string name="ctn_desc_login_with_google">Login with google</string>
+
+</resources>
