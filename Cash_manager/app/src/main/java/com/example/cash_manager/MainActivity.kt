@@ -65,8 +65,8 @@ fun LoginPage(){
             Spacer(modifier = Modifier.size(60.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "User Name",
-            placeholder = "Enter your user name",
+            label = "User Name/Email",
+            placeholder = "Enter your user name or your email",
         )
             Spacer(modifier = Modifier.size(30.dp))
         LoginTextField(

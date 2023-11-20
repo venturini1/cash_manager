@@ -53,27 +53,33 @@ fun SignUpPage(){
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold,
         )
-        Spacer(modifier = Modifier.size(60.dp))
+        Spacer(modifier = Modifier.size(50.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "User Name",
             placeholder = "Enter your user name",
         )
-        Spacer(modifier = Modifier.size(40.dp))
+        Spacer(modifier = Modifier.size(30.dp))
+        LoginTextField(
+            modifier = Modifier.fillMaxWidth(),
+            label = "User Email",
+            placeholder = "Enter your user email",
+        )
+        Spacer(modifier = Modifier.size(30.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "Password",
             placeholder = "Enter your password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(40.dp))
+        Spacer(modifier = Modifier.size(30.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "Confirm Password",
             placeholder = "Confirm Password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(70.dp))
+        Spacer(modifier = Modifier.size(60.dp))
         SignUpButton(
             modifier = Modifier.align(CenterHorizontally),
             text= "Back",
@@ -85,8 +91,8 @@ fun SignUpPage(){
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreviewDark() {
-    Cash_managerTheme(darkTheme = true) {
+fun SignUpPagePreview() {
+    Cash_managerTheme() {
         SignUpPage()
     }
 }
