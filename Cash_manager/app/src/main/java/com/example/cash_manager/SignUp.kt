@@ -56,14 +56,14 @@ fun SignUpPage(){
         Spacer(modifier = Modifier.size(50.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "User Name",
+            label = "Username",
             placeholder = "Enter your user name",
         )
         Spacer(modifier = Modifier.size(30.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "User Email",
-            placeholder = "Enter your user email",
+            label = "Email",
+            placeholder = "Enter your email",
         )
         Spacer(modifier = Modifier.size(30.dp))
         LoginTextField(

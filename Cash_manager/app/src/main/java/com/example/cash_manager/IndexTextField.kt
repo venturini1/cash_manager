@@ -1,4 +1,4 @@
-package com.example.cash_manager
+/*package com.example.cash_manager
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,22 +32,27 @@ import androidx.constraintlayout.widget.Placeholder
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IndexTextField(
-    label: String,
-    placeholder: String,
+    name: String,
+    price: Float,
     modifier : Modifier = Modifier,
-    isPassword: Boolean = false,
+   
 ){
-    var textFieldValue by remember { mutableStateOf("") }
-    var isHided by remember { mutableStateOf(true) }
-
     Column(
         modifier = modifier,
     ) {
         Text(
-            modifier = Modifier.padding(bottom = 16.dp),
-            text = label,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(30.dp),
+            text = name,
             fontWeight = FontWeight.SemiBold,
         )
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(30.dp),
+            text = price,
+            fontWeight = FontWeight.SemiBold,
+        )
+        /*
         TextField(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(30.dp),
@@ -58,32 +63,14 @@ fun IndexTextField(
             placeholder = {
                 Text(text = placeholder)
             },
-            trailingIcon = {
-                if (isPassword) {
-                    IconButton(onClick = {
-                        isHided = !isHided
-                    }) {
-                        Icon(
-                            imageVector = if (isHided) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                            contentDescription = if (isHided) {
-                                stringResource(id = R.string.ctn_desc_password_icon_display)
-                            } else {
-                                stringResource(id = R.string.ctn_desc_password_icon_hide)
-                            }
-                        )
-                    }
-
-                }
-            },
-            visualTransformation = if (isPassword && isHided) PasswordVisualTransformation() else VisualTransformation.None,
-            singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color(0xF128128128),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
             )
-        )
+        )*/
+
     }
 }
 
@@ -91,8 +78,7 @@ fun IndexTextField(
 @Composable
 fun IndexTextFieldPreview(){
     IndexTextField(
-        label = "User Name",
-        placeholder = "Bertran",
-        //isPassword = true,
+        name = "Kinder",
+        price = 6.9
     )
-}
+}*/
