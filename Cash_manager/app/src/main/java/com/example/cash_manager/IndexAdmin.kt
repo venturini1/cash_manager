@@ -31,20 +31,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 
-class Index : ComponentActivity() {
+class IndexAdmin : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                IndexPage()
+                IndexAdminPage()
             }
         }
     }
 }
 
 @Composable
-fun IndexPage(){
+fun IndexAdminPage(){
 
     Column(
         modifier = Modifier
@@ -55,15 +55,12 @@ fun IndexPage(){
         RectangleWithText(
             "Produit A",
             "$19.99",
-
         )
-        IndexButton(
+        IndexAdminButton(
             text= "Cancel",
-            text1= "Add",
-        )
-        RectangleWithTotal(
-            "Total",
-            "19.99€"
+            text1= "Save",
+            text2= "Delete",
+            text3= "Add",
         )
 
     }
@@ -71,9 +68,9 @@ fun IndexPage(){
 
 @Preview(showBackground = true)
 @Composable
-fun IndexPagePreview() {
+fun IndexPageAdminPreview() {
     Cash_managerTheme() {
-        IndexPage()
+        IndexAdminPage()
     }
 }
 
