@@ -8,12 +8,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.End
@@ -23,21 +27,92 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cash_manager.ui.theme.Cash_managerTheme
+import kotlinx.coroutines.launch
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dagger.hilt.android.AndroidEntryPoint
+import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
+                val context = LocalContext.current
+                val barcodeScanner = BarcodeScanner(context)
                 // A surface container using the 'background' color from the theme
-                LoginPage()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color.Blue
+                ) {
+
+                    val barcodeResults =
+                        barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
+
+                    ScanBarcode(
+                        barcodeScanner::startScan,
+                        barcodeResults.value
+                    )
+                }
             }
         }
+    }
+}
+
+
+
+@Composable
+private fun ScanBarcode(
+    onScanBarcode: suspend () -> Unit,
+    barcodeValue: String?
+) {
+    val scope = rememberCoroutineScope()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth(.85f),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Red
+            ),
+            onClick = {
+                scope.launch {
+                    onScanBarcode()
+                }
+            }) {
+            Text(
+                text = "Scan Barcode",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.displayMedium,
+                color = Color.White
+                //style = TextStyle(fontWeight = FontWeight.Bold)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = barcodeValue ?: "0000000000",
+            style = MaterialTheme.typography.displayMedium,
+            color = Color.White
+        )
+
     }
 }
 
