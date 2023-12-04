@@ -1,7 +1,5 @@
 package com.example.cash_manager
 
-//import android.service.autofill.UserData
-
 data class SignInResult(
     val data: UserData?,
     val errorMessage: String?

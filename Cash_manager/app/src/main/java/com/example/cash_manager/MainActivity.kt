@@ -73,6 +73,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     println("testere")
                     val navController = rememberNavController()
+                    //GreetingPreview()
                     NavHost(navController = navController, startDestination = "sign_in") {
                         composable("sign_in") {
                             val viewModel = viewModel<SignInViewModel>()
@@ -196,7 +197,9 @@ private fun ScanBarcode(
 }
 
 @Composable
-fun LoginPage(){
+fun LoginPage(
+
+){
 
         Column(
             modifier = Modifier
