@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,7 +46,10 @@ class IndexAdmin : ComponentActivity() {
 
 @Composable
 fun IndexAdminPage(){
-
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,6 +68,12 @@ fun IndexAdminPage(){
         )
 
     }
+    BottomButton(
+        modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxWidth(),
+    )
+}
 }
 
 @Preview(showBackground = true)
