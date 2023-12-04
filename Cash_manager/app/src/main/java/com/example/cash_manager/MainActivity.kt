@@ -48,21 +48,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
-                val context = LocalContext.current
-                val barcodeScanner = BarcodeScanner(context)
+             //   val context = LocalContext.current
+               // val barcodeScanner = BarcodeScanner(context)
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color.Blue
+                    color = Color.White
                 ) {
 
-                    val barcodeResults =
-                        barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
-
-                    ScanBarcode(
-                        barcodeScanner::startScan,
-                        barcodeResults.value
-                    )
+                    LoginPage()
                 }
             }
         }
