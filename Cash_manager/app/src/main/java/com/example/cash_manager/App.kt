@@ -25,8 +25,5 @@ class App : Application(), ImageLoaderFactory {
             Timber.plant(Timber.DebugTree())
         } else
             Timber.plant(Timber.DebugTree())
-
     }
-
-
 }
