@@ -10,7 +10,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,11 +19,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+
 
 @Composable
 fun LoginButton(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    navController: NavController
 ){
     Button(
         modifier = modifier.height(50.dp),
@@ -32,7 +36,11 @@ fun LoginButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF728963),
         ),
-        onClick = { /*TODO*/ }
+        onClick = {
+            onClick() // Appel de la fonction lambda passée en paramètre
+            // Naviguer vers la page d'index lorsque le bouton de connexion est cliqué
+            navController.navigate("index")
+        }
     )
     {
         Text(text = text)
@@ -111,7 +119,14 @@ fun LoginOutlineButtonPreview(){
 @Preview(showBackground = true)
 @Composable
 fun LoginButtonPreview() {
+    // Assurez-vous d'avoir un NavController disponible dans votre portée
+    val navController = rememberNavController()
+
     LoginButton(
-        text= "Login",
+        text = "Login",
+        onClick = {
+            // Actions à effectuer lors du clic sur le bouton (si nécessaire)
+        },
+        navController = navController // Passez le NavController ici
     )
 }

@@ -22,6 +22,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 
 class Login : ComponentActivity() {
@@ -30,21 +32,22 @@ class Login : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                LoginPage()
+                val navController = rememberNavController()
+                LoginPage(navController = navController)
             }
         }
     }
 }
 
+
 @Composable
-fun LoginPage(){
+fun LoginPage(navController: NavController) {
     println("Navigating to index...")
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-    )
-    {
+    ) {
         Spacer(modifier = Modifier.size(40.dp))
         Text(
             text = "Login",
@@ -77,7 +80,11 @@ fun LoginPage(){
         Spacer(modifier = Modifier.size(30.dp))
         LoginButton(
             modifier = Modifier.fillMaxWidth(),
-            text= "Login"
+            text = "Login",
+            onClick = {
+                // Actions à effectuer lors du clic sur le bouton (si nécessaire)
+            },
+            navController = navController // Passez le NavController ici également
         )
         Spacer(modifier = Modifier.size(30.dp))
         LoginDivider(
@@ -95,6 +102,7 @@ fun LoginPage(){
         )
     }
 }
+
 @Composable
 fun buildCreateAccountAnnotatedString() = buildAnnotatedString {
     append("Don't have an account ? ")
@@ -109,25 +117,8 @@ fun buildCreateAccountAnnotatedString() = buildAnnotatedString {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+    val navController = rememberNavController()
     Cash_managerTheme {
-        LoginPage()
+        LoginPage(navController = navController)
     }
 }
-
-
-/*
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    Cash_managerTheme {
-        LoginPage()
-    }
-}
-
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreviewDark() {
-    Cash_managerTheme(darkTheme = true) {
-        LoginPage()
-    }
-}*/
