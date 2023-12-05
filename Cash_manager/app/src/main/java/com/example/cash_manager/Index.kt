@@ -8,12 +8,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -57,21 +61,46 @@ fun IndexPage(navController: NavController) {
             IndexButton(
                 text = "Cancel",
                 text1 = "Add",
-
-            )
-
-            RectangleWithTotal(
-                "Total",
-                "19.99€"
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
             )
         }
 
-        BottomButton(
+        Box(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
-            navController = navController
-        )
+                .fillMaxSize()
+                .align(Alignment.BottomCenter),
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+
+            )
+            {
+
+                RectangleWithTotal(
+                    "Total",
+                    "19.99€",
+                    modifier = Modifier
+                        .weight(1f)
+                )
+
+                Spacer(modifier = Modifier.size(1.dp))
+
+                PayButton(
+                    text = "Pay",
+                    modifier = Modifier
+                        .weight(1f)
+                )
+            }
+            Spacer(modifier = Modifier.size(40.dp))
+            BottomButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter),
+                navController = navController
+            )
+        }
     }
 }
 

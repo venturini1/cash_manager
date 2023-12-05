@@ -48,7 +48,7 @@ fun RectangleWithText(name: String, price: String) {
 }
 
 @Composable
-fun RectangleWithTotal(name: String, price: String) {
+fun RectangleWithTotal(name: String, price: String,modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

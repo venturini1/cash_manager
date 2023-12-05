@@ -143,6 +143,36 @@ fun BottomButton(
     }
 }
 
+@Composable
+fun PayButton(
+    text: String,
+    modifier: Modifier = Modifier,
+
+    ) {
+    Button(
+
+        modifier = modifier
+            .height(60.dp)
+            .width(90.dp),
+        shape = RoundedCornerShape(30.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF728963),
+            contentColor = Color.White,
+        ),
+        onClick = { /*TODO*/ }
+    )
+    {
+        Text(text = text)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PayButtonPreview() {
+    PayButton(
+        text= "Pay",
+    )
+}
 
 @Preview(showBackground = true)
 @Composable
