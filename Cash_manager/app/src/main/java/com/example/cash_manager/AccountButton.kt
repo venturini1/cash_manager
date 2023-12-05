@@ -42,6 +42,43 @@ fun DisconnectButton(
     }
 }
 
+
+@Composable
+fun HistoryButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    navController: NavController,
+) {
+    Button(
+        modifier = modifier
+            .padding(0.dp)
+            .height(40.dp),
+        shape = RoundedCornerShape(30.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(78, 136, 81, 255),
+        ),
+        onClick = { Log.d("DisconnectButton", "Button clicked")
+            navController.navigate("history") }
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .padding(0.dp)
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun HistoryButtonPreview() {
+    val navController = rememberNavController()
+    HistoryButton(
+        text = "History",
+        navController = navController
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DisconnectButtonPreview() {

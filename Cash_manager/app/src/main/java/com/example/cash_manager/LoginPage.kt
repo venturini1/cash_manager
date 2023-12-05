@@ -42,7 +42,6 @@ class Login : ComponentActivity() {
 
 @Composable
 fun LoginPage(navController: NavController) {
-    println("Navigating to index...")
     Column(
         modifier = Modifier
             .fillMaxSize()

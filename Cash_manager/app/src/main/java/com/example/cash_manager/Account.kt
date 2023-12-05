@@ -2,6 +2,7 @@ package com.example.cash_manager
 
 
 import DisconnectButton
+import HistoryButton
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -68,33 +69,40 @@ fun AccountPage(navController: NavController){
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold,
         )
-        Spacer(modifier = Modifier.size(50.dp))
+        Spacer(modifier = Modifier.size(5.dp))
+        HistoryButton(
+            modifier = Modifier.fillMaxWidth(),
+
+            text = "History",
+            navController = navController
+        )
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "User Name",
             placeholder = "Enter your user name",
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "User Email",
             placeholder = "Enter your user email",
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "New Password",
             placeholder = "Enter your password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "Confirm Password",
             placeholder = "Confirm Password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(60.dp))
+        Spacer(modifier = Modifier.size(50.dp))
         SignUpButton(
             modifier = Modifier.align(CenterHorizontally),
             text= "Back",
