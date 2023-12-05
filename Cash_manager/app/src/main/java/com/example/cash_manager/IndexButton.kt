@@ -2,7 +2,10 @@ package com.example.cash_manager
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,8 +27,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
@@ -60,7 +65,8 @@ fun IndexButton(
         }
         Spacer(modifier = Modifier.size(40.dp))
         Button(
-            modifier = modifier.height(60.dp)
+            modifier = modifier
+                .height(60.dp)
                 .width(150.dp),
             shape = RoundedCornerShape(30.dp),
             colors = ButtonDefaults.buttonColors(
@@ -147,30 +153,71 @@ fun BottomButton(
 fun PayButton(
     text: String,
     modifier: Modifier = Modifier,
-
-    ) {
-    Button(
-
+    name: String,
+    price: String,
+) {
+    Box(
         modifier = modifier
-            .height(60.dp)
-            .width(90.dp),
-        shape = RoundedCornerShape(30.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF728963),
-            contentColor = Color.White,
-        ),
-        onClick = { /*TODO*/ }
-    )
-    {
-        Text(text = text)
+            .fillMaxWidth(),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .height(100.dp)
+                .padding(16.dp)
+                .background(Color(0xF128128128), RoundedCornerShape(30.dp))
+                .padding(0.dp)
+                .align(Alignment.CenterStart) // Aligner à gauche
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(0.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Partie haute : Nom
+                Text(
+                    text = name,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
+                )
+
+                Divider(modifier = Modifier
+                    .padding(vertical = 1.dp))
+                // Partie basse : Prix
+                Text(
+                    text = price,
+                    fontSize = 25.sp,
+                )
+            }
+        }
+        Button(
+            modifier = Modifier
+                .fillMaxWidth(0.3f)
+                .height(60.dp)
+                .width(90.dp)
+                .align(Alignment.CenterEnd)
+                .padding(end = 16.dp),
+            shape = RoundedCornerShape(30.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF728963),
+                contentColor = Color.White,
+            ),
+            onClick = { /*TODO*/ }
+        ) {
+            Text(text = text)
+        }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PayButtonPreview() {
     PayButton(
         text= "Pay",
+        name="Total",
+        price= "19.99€"
     )
 }
 

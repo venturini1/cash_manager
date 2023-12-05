@@ -5,6 +5,7 @@ import RectangleWithTotal
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
@@ -66,41 +67,28 @@ fun IndexPage(navController: NavController) {
             )
         }
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .align(Alignment.BottomCenter),
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
 
-            )
-            {
 
-                RectangleWithTotal(
-                    "Total",
-                    "19.99€",
-                    modifier = Modifier
-                        .weight(1f)
-                )
-
-                Spacer(modifier = Modifier.size(1.dp))
 
                 PayButton(
-                    text = "Pay",
                     modifier = Modifier
-                        .weight(1f)
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 70.dp),
+                    //horizontalArrangement = Arrangement.SpaceEvenly,
+                    text= "Pay",
+                    name="Total",
+                    price= "19.99€"
                 )
-            }
-            Spacer(modifier = Modifier.size(40.dp))
+
+
             BottomButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter),
                 navController = navController
             )
-        }
+
     }
 }
 
