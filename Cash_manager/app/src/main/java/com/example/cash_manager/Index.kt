@@ -22,7 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 import androidx.compose.ui.Alignment.Companion.CenterVertically
-
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 
 class Index : ComponentActivity() {
@@ -31,13 +32,14 @@ class Index : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                IndexPage()
+                val navController = rememberNavController()
+                IndexPage(navController = navController)
             }
         }
     }
 }
 @Composable
-fun IndexPage() {
+fun IndexPage(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,6 +57,7 @@ fun IndexPage() {
             IndexButton(
                 text = "Cancel",
                 text1 = "Add",
+
             )
 
             RectangleWithTotal(
@@ -67,6 +70,7 @@ fun IndexPage() {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth(),
+            navController = navController
         )
     }
 }
@@ -74,8 +78,9 @@ fun IndexPage() {
 @Preview(showBackground = true)
 @Composable
 fun IndexPagePreview() {
+    val navController = rememberNavController()
     Cash_managerTheme() {
-        IndexPage()
+        IndexPage(navController = navController)
     }
 }
 

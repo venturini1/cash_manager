@@ -26,14 +26,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
 fun IndexButton(
     text: String,
     text1: String,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+
+    ){
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -73,7 +76,8 @@ fun IndexButton(
 }
 @Composable
 fun BottomButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController,
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -86,7 +90,7 @@ fun BottomButton(
             .padding(vertical = 8.dp) // Ajustez la valeur selon vos besoins
     ) {
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("index") },
             modifier = Modifier
                 .weight(1f)
         ) {
@@ -106,7 +110,7 @@ fun BottomButton(
         )
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("history") },
             modifier = Modifier
                 .weight(1f)
         ) {
@@ -126,7 +130,7 @@ fun BottomButton(
         )
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("account") },
             modifier = Modifier
                 .weight(1f)
         ) {
@@ -143,8 +147,10 @@ fun BottomButton(
 @Preview(showBackground = true)
 @Composable
 fun BottomButtonPreview(){
+    val navController = rememberNavController()
     BottomButton(
         modifier = Modifier.fillMaxWidth(),
+        navController = navController
     )
 }
 

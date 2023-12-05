@@ -30,6 +30,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 
 class IndexAdmin : ComponentActivity() {
@@ -38,14 +40,15 @@ class IndexAdmin : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                IndexAdminPage()
+                val navController = rememberNavController()
+                IndexAdminPage(navController = navController )
             }
         }
     }
 }
 
 @Composable
-fun IndexAdminPage(){
+fun IndexAdminPage(navController: NavController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,6 +75,7 @@ fun IndexAdminPage(){
         modifier = Modifier
             .align(Alignment.BottomCenter)
             .fillMaxWidth(),
+        navController = navController
     )
 }
 }
@@ -79,8 +83,9 @@ fun IndexAdminPage(){
 @Preview(showBackground = true)
 @Composable
 fun IndexPageAdminPreview() {
+    val navController = rememberNavController()
     Cash_managerTheme() {
-        IndexAdminPage()
+        IndexAdminPage(navController = navController)
     }
 }
 

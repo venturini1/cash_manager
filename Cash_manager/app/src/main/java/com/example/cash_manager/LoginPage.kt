@@ -116,7 +116,7 @@ fun buildCreateAccountAnnotatedString() = buildAnnotatedString {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun LoginPreview() {
     val navController = rememberNavController()
     Cash_managerTheme {
         LoginPage(navController = navController)
