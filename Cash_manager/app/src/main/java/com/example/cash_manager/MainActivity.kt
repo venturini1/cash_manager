@@ -41,8 +41,8 @@ fun MainContent() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") {  LoginPage(navController = navController) }
-        composable("index") {  IndexPage(navController = navController) }
+        composable("login") { LoginPage(navController = navController) }
+        composable("index") { IndexPage(navController = navController) }
         composable("history") { HistoryPage(navController = navController) }
         composable("account") { AccountPage(navController = navController) }
 

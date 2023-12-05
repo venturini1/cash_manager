@@ -55,6 +55,7 @@ fun AccountPage(navController: NavController){
         DisconnectButton(
             modifier = Modifier.align(Alignment.End),
             text = "Disconnect",
+            navController = navController
         )
         Text(
             text = "Account",
