@@ -39,7 +39,7 @@ fun LoginButton(
         onClick = {
             onClick() // Appel de la fonction lambda passée en paramètre
             // Naviguer vers la page d'index lorsque le bouton de connexion est cliqué
-            navController.navigate("index")
+            navController.navigate("scan")
         }
     )
     {

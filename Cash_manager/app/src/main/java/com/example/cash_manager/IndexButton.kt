@@ -90,7 +90,7 @@ fun BottomButton(
             .padding(vertical = 8.dp) // Ajustez la valeur selon vos besoins
     ) {
         IconButton(
-            onClick = { navController.navigate("index") },
+            onClick = { navController.navigate("scan") },
             modifier = Modifier
                 .weight(1f)
         ) {
@@ -110,7 +110,7 @@ fun BottomButton(
         )
 
         IconButton(
-            onClick = { navController.navigate("history") },
+            onClick = { navController.navigate("index") },
             modifier = Modifier
                 .weight(1f)
         ) {
