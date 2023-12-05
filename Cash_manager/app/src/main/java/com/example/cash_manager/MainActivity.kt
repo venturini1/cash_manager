@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
                     //GreetingPreview()
                     NavHost(navController = navController, startDestination = "sign_in") {
                         composable("sign_in") {
+                            LoginPage()
                             val viewModel = viewModel<SignInViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
 
