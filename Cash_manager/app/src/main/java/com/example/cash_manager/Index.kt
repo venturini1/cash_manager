@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -65,6 +66,10 @@ fun IndexPage(navController: NavController) {
                 modifier = Modifier
                     .padding(vertical = 16.dp)
             )
+            Spacer(modifier = Modifier.size(40.dp))
+            Surface {
+                ProductList()
+            }
         }
 
 
@@ -88,6 +93,7 @@ fun IndexPage(navController: NavController) {
                     .align(Alignment.BottomCenter),
                 navController = navController
             )
+
 
     }
 }
