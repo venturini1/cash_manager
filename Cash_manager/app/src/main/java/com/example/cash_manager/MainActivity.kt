@@ -3,34 +3,42 @@ package com.example.cash_manager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+<<<<<<< HEAD
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+=======
+>>>>>>> develop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
+<<<<<<< HEAD
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+=======
+>>>>>>> develop
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.cash_manager.ui.theme.Cash_managerTheme
+<<<<<<< HEAD
 import kotlinx.coroutines.launch
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 //import android.provider.ContactsContract.CommonDataKinds.Identity
@@ -48,6 +56,12 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
 
 
+=======
+import androidx.compose.material3.MaterialTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+>>>>>>> develop
 
 class MainActivity : ComponentActivity() {
 
@@ -66,6 +80,7 @@ class MainActivity : ComponentActivity() {
              //   val context = LocalContext.current
                // val barcodeScanner = BarcodeScanner(context)
                 // A surface container using the 'background' color from the theme
+<<<<<<< HEAD
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                    // color = MaterialTheme.colors.background
@@ -145,6 +160,9 @@ class MainActivity : ComponentActivity() {
                     }
                   //  LoginPage()
                 }
+=======
+                MainContent()
+>>>>>>> develop
             }
         }
     }
@@ -153,6 +171,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
+<<<<<<< HEAD
 private fun ScanBarcode(
     onScanBarcode: suspend () -> Unit,
     barcodeValue: String?
@@ -201,96 +220,25 @@ private fun ScanBarcode(
 fun LoginPage(
 
 ){
+=======
+fun MainContent() {
+    val navController = rememberNavController()
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        )
-        {
-            Spacer(modifier = Modifier.size(40.dp))
-        Text(
-            text = "Login",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-        )
-            Spacer(modifier = Modifier.size(4.dp))
-        Text(
-           text = "Login to continue the app",
-           fontSize = 12.sp,
-           fontWeight = FontWeight.Bold,
-        )
-            Spacer(modifier = Modifier.size(60.dp))
-        LoginTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "User Name/Email",
-            placeholder = "Enter your user name or your email",
-        )
-            Spacer(modifier = Modifier.size(30.dp))
-        LoginTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "Password",
-            placeholder = "Enter your password",
-            isPassword = true,
-        )
-        LoginOutlineButton(
-            modifier = Modifier.align(End),
-            text = "Forget Password"
-        )
-            Spacer(modifier = Modifier.size(30.dp))
-        LoginButton(
-            modifier = Modifier.fillMaxWidth(),
-            text= "Login"
-        )
-            Spacer(modifier = Modifier.size(30.dp))
-        LoginDivider(
-            modifier = Modifier.fillMaxWidth(),
-            informationText = "Or Login With"
-        )
-            Spacer(modifier = Modifier.size(30.dp))
-        LoginThirdPartyRow(
-            modifier = Modifier.fillMaxWidth(),
-        )
-            Spacer(modifier = Modifier.size(30.dp))
-        LoginClickableText(
-            modifier = Modifier.align(CenterHorizontally),
-            text = buildCreateAccountAnnotatedString()
-        )
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") { LoginPage(navController = navController) }
+        composable("scan") { ScanPage(navController = navController) }
+        composable("index") { IndexPage(navController = navController) }
+        composable("history") { HistoryPage(navController = navController) }
+        composable("account") { AccountPage(navController = navController) }
+>>>>>>> develop
+
     }
-}
-@Composable
-fun buildCreateAccountAnnotatedString() = buildAnnotatedString {
-        append("Don't have an account ? ")
-        withStyle(style = SpanStyle(
-            fontSize = 15.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.Blue)
-        ){
-            append("Create") }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun MainContentPreview() {
     Cash_managerTheme {
-        LoginPage()
+        MainContent()
     }
 }
-
-
-/*
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    Cash_managerTheme {
-        LoginPage()
-    }
-}
-
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreviewDark() {
-    Cash_managerTheme(darkTheme = true) {
-        LoginPage()
-    }
-}*/

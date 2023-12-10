@@ -2,9 +2,11 @@ package com.example.cash_manager
 
 
 import DisconnectButton
+import HistoryButton
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 
 class Account : ComponentActivity() {
@@ -28,14 +32,20 @@ class Account : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                AccountPage()
+                val navController = rememberNavController()
+                AccountPage(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun AccountPage(){
+fun AccountPage(navController: NavController){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    )
+    {
 
     Column(
         modifier = Modifier
@@ -46,6 +56,7 @@ fun AccountPage(){
         DisconnectButton(
             modifier = Modifier.align(Alignment.End),
             text = "Disconnect",
+            navController = navController
         )
         Text(
             text = "Account",
@@ -58,64 +69,64 @@ fun AccountPage(){
             fontSize = 12.sp,
             fontWeight = FontWeight.Bold,
         )
-        Spacer(modifier = Modifier.size(50.dp))
+        Spacer(modifier = Modifier.size(5.dp))
+        HistoryButton(
+            modifier = Modifier.fillMaxWidth(),
+
+            text = "History",
+            navController = navController
+        )
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "User Name",
             placeholder = "Enter your user name",
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "User Email",
             placeholder = "Enter your user email",
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "New Password",
             placeholder = "Enter your password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(20.dp))
         LoginTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "Confirm Password",
             placeholder = "Confirm Password",
             isPassword = true,
         )
-        Spacer(modifier = Modifier.size(60.dp))
+        Spacer(modifier = Modifier.size(50.dp))
         SignUpButton(
             modifier = Modifier.align(CenterHorizontally),
             text= "Back",
             text1= "Save",
         )
-
     }
+        BottomButton(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
+            navController = navController
+        )
+    }
+
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun AccountPagePreview() {
+    val navController = rememberNavController()
     Cash_managerTheme() {
-        AccountPage()
+        AccountPage(navController = navController)
     }
 }
 
 
-/*
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    Cash_managerTheme {
-        LoginPage()
-    }
-}
-
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreviewDark() {
-    Cash_managerTheme(darkTheme = true) {
-        LoginPage()
-    }
-}*/

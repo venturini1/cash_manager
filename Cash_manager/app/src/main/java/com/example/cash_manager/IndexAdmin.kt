@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,7 +36,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+<<<<<<< HEAD
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+=======
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+>>>>>>> develop
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction0
@@ -48,6 +54,7 @@ class IndexAdmin : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
+<<<<<<< HEAD
                 val context = LocalContext.current
                 val barcodeScanner = BarcodeScanner(context)
 
@@ -68,6 +75,11 @@ class IndexAdmin : ComponentActivity() {
                     )
 
                 }
+=======
+                // A surface container using the 'background' color from the theme
+                val navController = rememberNavController()
+                IndexAdminPage(navController = navController )
+>>>>>>> develop
             }
         }
     }
@@ -75,8 +87,11 @@ class IndexAdmin : ComponentActivity() {
 
 
 @Composable
-fun IndexAdminPage(){
-
+fun IndexAdminPage(navController: NavController){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -95,9 +110,17 @@ fun IndexAdminPage(){
         )
 
     }
+    BottomButton(
+        modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxWidth(),
+        navController = navController
+    )
+}
 }
 
 @Composable
+<<<<<<< HEAD
 private fun ScanBarcode(
     onScanBarcode: suspend () -> Unit,
     barcodeValue: String?
@@ -139,6 +162,12 @@ private fun ScanBarcode(
             color = Color.White
         )
 
+=======
+fun IndexPageAdminPreview() {
+    val navController = rememberNavController()
+    Cash_managerTheme() {
+        IndexAdminPage(navController = navController)
+>>>>>>> develop
     }
 }
 
