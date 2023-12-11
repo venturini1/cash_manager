@@ -36,15 +36,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-<<<<<<< HEAD
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-=======
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
->>>>>>> develop
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction0
+import androidx.navigation.compose.rememberNavController as rememberNavController1
 
 var save1: KSuspendFunction0<Unit>? = null;
 var save2: String? = null;
@@ -54,32 +51,9 @@ class IndexAdmin : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
-<<<<<<< HEAD
-                val context = LocalContext.current
-                val barcodeScanner = BarcodeScanner(context)
-
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Blue
-                ) {
-                    // A surface container using the 'background' color from the theme
-                    //IndexAdminPage()
-                    val barcodeResults =
-                        barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
-                    save1 = barcodeScanner::startScan
-                    save2 = barcodeResults.value
-                    ScanBarcode(
-                        barcodeScanner::startScan,
-                        barcodeResults.value
-
-                    )
-
-                }
-=======
                 // A surface container using the 'background' color from the theme
-                val navController = rememberNavController()
+                val navController = rememberNavController1()
                 IndexAdminPage(navController = navController )
->>>>>>> develop
             }
         }
     }
@@ -119,76 +93,41 @@ fun IndexAdminPage(navController: NavController){
 }
 }
 
-@Composable
-<<<<<<< HEAD
-private fun ScanBarcode(
-    onScanBarcode: suspend () -> Unit,
-    barcodeValue: String?
-) {
-    val scope = rememberCoroutineScope()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(.85f),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Red
-            ),
-            onClick = {
-                scope.launch {
-                    onScanBarcode()
-                }
-            }) {
-            Text(
-                text = "Scan Barcode",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.displayMedium,
-                color = Color.White
-                //style = TextStyle(fontWeight = FontWeight.Bold)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = barcodeValue ?: "0000000000",
-            style = MaterialTheme.typography.displayMedium,
-            color = Color.White
-        )
-
-=======
-fun IndexPageAdminPreview() {
-    val navController = rememberNavController()
-    Cash_managerTheme() {
-        IndexAdminPage(navController = navController)
->>>>>>> develop
-    }
-}
+//@Composable
+//fun IndexPageAdminPreview() {
+//    val navController = rememberNavController1()
+//    Cash_managerTheme() {
+//        IndexAdminPage(navController = navController)
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = Color.White
+//        ) {
+//            ScanBarcode({
+//                save1
+//            }, save2)
+//    //        IndexAdminPage()
+//        }
+//    }
+//}
 
 
-@Preview
-@Composable
-fun PreviewScanBarcode() {
-    Cash_managerTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Color.White
-        ) {
-
-            ScanBarcode({
-                save1
-            }, save2)
-            IndexAdminPage()
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun PreviewScanBarcode() {
+//    Cash_managerTheme {
+//        // A surface container using the 'background' color from the theme
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = Color.White
+//        ) {
+//
+//            ScanBarcode({
+//                save1
+//            }, save2)
+//            IndexAdminPage()
+//        }
+//    }
+//}
 
 //@Preview(showBackground = true)
 //@Composable
