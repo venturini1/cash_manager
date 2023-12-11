@@ -1,5 +1,6 @@
 package com.example.cash_manager
 
+import ProductList
 import RectangleWithText
 import RectangleWithTotal
 import android.os.Bundle
