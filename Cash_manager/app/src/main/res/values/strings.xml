@@ -8,5 +8,6 @@
     <string name="ctn_desc_use_scan">Use the scan</string>
     <string name="ctn_desc_see_ticket">See your old tickets</string>
     <string name="ctn_desc_edit_your_information">Edit your information</string>
+    <string name="ctn_desc_delete_product">Delete product</string>
 
 </resources>
