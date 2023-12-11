@@ -155,6 +155,7 @@ fun PayButton(
     modifier: Modifier = Modifier,
     name: String,
     price: String,
+    navController: NavController? = null
 ) {
     Box(
         modifier = modifier
@@ -203,7 +204,7 @@ fun PayButton(
                 containerColor = Color(0xFF728963),
                 contentColor = Color.White,
             ),
-            onClick = { /*TODO*/ }
+            onClick = { navController?.navigate("https://fr.wikipedia.org/wiki/Couteau") }
         ) {
             Text(text = text)
         }
