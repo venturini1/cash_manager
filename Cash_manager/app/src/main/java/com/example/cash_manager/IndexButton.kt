@@ -1,5 +1,8 @@
 package com.example.cash_manager
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,6 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+//import kotlinx.coroutines.flow.internal.NoOpContinuation.context
+
+
 
 
 @Composable
@@ -156,6 +164,7 @@ fun PayButton(
     name: String,
     price: String,
 ) {
+    val localUriHandler = LocalUriHandler.current
     Box(
         modifier = modifier
             .fillMaxWidth(),
@@ -203,7 +212,9 @@ fun PayButton(
                 containerColor = Color(0xFF728963),
                 contentColor = Color.White,
             ),
-            onClick = { /*TODO*/ }
+            onClick = {
+                localUriHandler.openUri("https://fr.wikipedia.org/wiki/Couteau")
+            }
         ) {
             Text(text = text)
         }
@@ -214,10 +225,11 @@ fun PayButton(
 @Preview(showBackground = true)
 @Composable
 fun PayButtonPreview() {
+    val context = LocalContext.current
     PayButton(
-        text= "Pay",
-        name="Total",
-        price= "19.99€"
+        text = "Pay",
+        name = "Total",
+        price = "19.99€",
     )
 }
 
