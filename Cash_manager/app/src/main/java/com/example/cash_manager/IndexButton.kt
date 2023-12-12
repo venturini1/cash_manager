@@ -213,7 +213,7 @@ fun PayButton(
                 contentColor = Color.White,
             ),
             onClick = {
-                localUriHandler.openUri("https://fr.wikipedia.org/wiki/Couteau")
+                localUriHandler.openUri("https://buy.stripe.com/4gw9AW9d52zi90s000")
             }
         ) {
             Text(text = text)
