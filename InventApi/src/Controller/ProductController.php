@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use App\Repository\AuthorRepository;
 
 class ProductController extends AbstractController
 {
@@ -67,7 +66,7 @@ class ProductController extends AbstractController
 
     // PUT METHOD
     #[Route('/api/products/{id}', name: 'updateProduct', methods: ['PUT'])]
-    public function updateProduct(Request $request, SerializerInterface $serializer, Product $currentProduct, EntityManagerInterface $em, AuthorRepository $authorRepository): JsonResponse
+    public function updateProduct(Request $request, SerializerInterface $serializer, Product $currentProduct, EntityManagerInterface $em): JsonResponse
     {
         $updatedProduct = $serializer->deserialize(
             $request->getContent(),
@@ -76,13 +75,9 @@ class ProductController extends AbstractController
             [AbstractNormalizer::OBJECT_TO_POPULATE => $currentProduct]
         );
 
-        $content = $request->toArray();
-        $idAuthor = $content['idAuthor'] ?? -1;
-        $updatedProduct->setAuthor($authorRepository->find($idAuthor));
-
         $em->persist($updatedProduct);
         $em->flush();
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
-    }
+    } 
 }
