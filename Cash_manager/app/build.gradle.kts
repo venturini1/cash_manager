@@ -89,6 +89,8 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
 
+    implementation ("androidx.core:core-ktx:1.9.0")
+
     implementation ("androidx.navigation:navigation-compose:2.7.5")
     implementation ("androidx.compose.material:material-icons-core")
     implementation ("com.google.mlkit:barcode-scanning:17.2.0")
