@@ -17,8 +17,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -33,6 +36,7 @@ import com.example.cash_manager.ui.theme.Cash_managerTheme
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -80,6 +84,15 @@ fun ScanPage(navController: NavController) {
         ScanBarcode({
             save1
         }, save2)
+        CodeCard(
+            jsonStr = "{\n" +
+                    "  id: 101,\n" +
+                    "  title: 'foo',\n" +
+                    "  body: 'bar',\n" +
+                    "  userId: 1\n" +
+                    "}"
+        )
+
         // Call the ScanBarcode composable function
 
     }
@@ -138,6 +151,33 @@ private fun ScanBarcode(
     }
 }
 
+@Composable
+fun CodeCard(jsonStr: String) {
+    val scrollState = rememberScrollState()
+
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .verticalScroll(
+            state = scrollState,
+            enabled = true
+        )
+        .padding(all = 8.dp),
+    ) {
+        Text(
+            modifier = Modifier.padding(start = 12.dp, top=12.dp),
+            text = "response: ",
+            style = MaterialTheme.typography.labelSmall,
+            fontFamily = FontFamily.Monospace
+        )
+        Text(
+            modifier = Modifier.padding(all = 12.dp),
+            text = jsonStr,
+            fontFamily = FontFamily.Monospace
+        )
+    }
+
+}
+
 @Preview
 @Composable
 fun PreviewScanBarcode() {
@@ -147,6 +187,7 @@ fun PreviewScanBarcode() {
             modifier = Modifier.fillMaxSize(),
             color = Color.White
         ) {
+            CodeCard("")
             ScanBarcode({
                 save1
             }, save2)

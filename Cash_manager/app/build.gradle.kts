@@ -6,6 +6,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.firebase-perf")
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
 }
 
 android {
@@ -53,6 +54,7 @@ android {
         }
     }
 }
+
 
 dependencies {
 
@@ -117,5 +119,20 @@ dependencies {
     //kapt("androidx.hilt:hilt-compiler:1.1.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.code.gson:gson:2.10")
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+//Ktor Dependencies
+    implementation("io.ktor:ktor-client-core:2.3.0")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
+    implementation("io.ktor:ktor-client-android:2.3.0")
+    implementation("io.ktor:ktor-client-logging:2.3.0")
 }
 
