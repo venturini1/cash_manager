@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "740664205439",
+    "project_id": "cash-manager-20e91",
+    "storage_bucket": "cash-manager-20e91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740664205439:android:157a0d6c0aba1f7973df4a",
+        "android_client_info": {
+          "package_name": "com.example.cash_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6pWOUWAlm92so15_DBAUhY5dRO2jCcI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
