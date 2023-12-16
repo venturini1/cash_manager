@@ -19,4 +19,12 @@ services:
       - "80:8000"
     depends_on:
       - symfony-db
+  
+  symfony-front:
+    build:
+      context: ./pageTelechargement   # Spécifiez le chemin vers le répertoire du Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    
     
