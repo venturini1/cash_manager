@@ -26,7 +26,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -41,7 +46,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.android.volley.toolbox.HttpResponse
+import io.ktor.client.*
+
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import kotlinx.coroutines.launch
+import io.ktor.client.engine.cio.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+
+import kotlinx.coroutines.runBlocking
 
 
 class Scan : ComponentActivity() {
@@ -69,8 +84,27 @@ class Scan : ComponentActivity() {
     }
 }
 
+suspend fun get_data(): String {
+    val client = HttpClient(CIO)
+
+    val response: io.ktor.client.statement.HttpResponse = client.get("https://valorant-api.com/v1/agents")
+    val Data = response.bodyAsText()
+    println(response.status)
+    client.close()
+    return Data
+}
+
 @Composable
 fun ScanPage(navController: NavController) {
+
+    var responseData by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(true) {
+        // Launch a coroutine to call the suspending function
+        val data = get_data()
+        responseData = data
+
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -81,17 +115,20 @@ fun ScanPage(navController: NavController) {
                 .fillMaxWidth(),
             navController = navController
         )
+
         ScanBarcode({
             save1
         }, save2)
-        CodeCard(
-            jsonStr = "{\n" +
-                    "  id: 101,\n" +
-                    "  title: 'foo',\n" +
-                    "  body: 'bar',\n" +
-                    "  userId: 1\n" +
-                    "}"
-        )
+        Text("Response Data: $responseData")
+
+//        CodeCard(
+//            jsonStr = "{\n" +
+//                    "  id: 101,\n" +
+//                    "  title: 'foo',\n" +
+//                    "  body: 'bar',\n" +
+//                    "  userId: 1\n" +
+//                    "}"
+//        )
 
         // Call the ScanBarcode composable function
 
