@@ -47,6 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.android.volley.toolbox.HttpResponse
+import dagger.hilt.android.AndroidEntryPoint
 import io.ktor.client.*
 
 import io.ktor.client.plugins.logging.LogLevel
@@ -59,7 +60,9 @@ import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
 
 
+@AndroidEntryPoint
 class Scan : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -68,17 +71,13 @@ class Scan : ComponentActivity() {
                 val barcodeScanner = BarcodeScanner(context)
                 val barcodeResults = barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
 
-                // Launch a coroutine scope
-                val scope = rememberCoroutineScope()
-
-                // Call the ScanBarcode composable function
                 ScanBarcode(
                     barcodeScanner::startScan,
                     barcodeResults.value
                 )
 
-                val navController = rememberNavController()
-                ScanPage(navController = navController)
+                //val navController = rememberNavController()
+               //ScanPage(navController = navController)
             }
         }
     }
@@ -188,33 +187,6 @@ private fun ScanBarcode(
     }
 }
 
-@Composable
-fun CodeCard(jsonStr: String) {
-    val scrollState = rememberScrollState()
-
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .verticalScroll(
-            state = scrollState,
-            enabled = true
-        )
-        .padding(all = 8.dp),
-    ) {
-        Text(
-            modifier = Modifier.padding(start = 12.dp, top=12.dp),
-            text = "response: ",
-            style = MaterialTheme.typography.labelSmall,
-            fontFamily = FontFamily.Monospace
-        )
-        Text(
-            modifier = Modifier.padding(all = 12.dp),
-            text = jsonStr,
-            fontFamily = FontFamily.Monospace
-        )
-    }
-
-}
-
 @Preview
 @Composable
 fun PreviewScanBarcode() {
@@ -224,10 +196,8 @@ fun PreviewScanBarcode() {
             modifier = Modifier.fillMaxSize(),
             color = Color.White
         ) {
-            CodeCard("")
-            ScanBarcode({
-                save1
-            }, save2)
+            ScanBarcode({}, null)
+
    //         IndexAdminPage()
         }
     }
