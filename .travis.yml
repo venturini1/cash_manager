@@ -29,9 +29,14 @@ jobs:
         - docker build -t symfony-db . 
         #- docker run image-app npm #run test
 
-    - stage: deploy
-      name: "Docker-compose deployment"
-      script:
-        - docker-compose up -d 
-        - docker exec -it cash_manager-symfony-api-1 php bin/console doctrine:schema:update --force -vvv    
-        - docker exec -it cash_manager-symfony-api-1 php bin/console doctrine:fixtures:load
+    # - stage: deploy
+    #   name: "Docker-compose deployment"
+    #   script:
+    #     - cd ..
+    #     - pwd
+    #     - ls
+    #     - docker-compose up 
+    #     - while sleep 180; do echo "Building..."; done &
+    #     - kill %1
+   
+
