@@ -1,8 +1,8 @@
 # Utiliser une image PHP avec Composer préinstallé
-FROM php:8.2-fpm
+FROM php:8.2-fpm-buster
 
 # Installer les dépendances nécessaires
-RUN apt-get update \
+RUN apt-get update --fix-missing \
     && apt-get install -y \
         libzip-dev \
         unzip \
@@ -24,6 +24,12 @@ COPY . .
 
 # Installer les dépendances de l'application Symfony
 RUN composer install --no-scripts --no-interaction
+
+# Nettoyer le cache APT
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Supprimer un script spécifique qui peut causer des problèmes
+RUN rm -f /etc/apt/apt.conf.d/docker-clean
 
 # Exposer le port 8000 pour le serveur Symfony
 EXPOSE 8000
