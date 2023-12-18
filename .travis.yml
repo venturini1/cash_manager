@@ -5,13 +5,14 @@ services:
 
 before_install:
   - pwd
-  - cd InventApi
+  - cd 
 
 jobs:
   include:
     - stage: API test
       name: "Run API test"
       script:
+        - cd InventApi
         - docker build -t symfony-api . 
         #- docker run image-api #mix test
 
