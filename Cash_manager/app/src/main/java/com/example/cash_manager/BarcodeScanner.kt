@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
+
 public class BarcodeScanner(
     appContext: Context
 ) {
@@ -22,11 +23,14 @@ public class BarcodeScanner(
 
     suspend fun startScan() {
         try {
-            val result = scanner.startScan().await()
-            barCodeResults.value = result.rawValue
-            Timber.d(barCodeResults.value)
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    barCodeResults.value = barcode.displayValue
+                }
+//            val result = scanner.startScan().await()
+//            barCodeResults.value = result.rawValue
+//            Timber.d(barCodeResults.value)
         } catch (e: Exception) {
-            Timber.d("scan error: $e")
         }
     }
 }

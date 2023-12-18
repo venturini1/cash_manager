@@ -21,6 +21,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class History : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +71,7 @@ fun HistoryPage(navController: NavController){
         )
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

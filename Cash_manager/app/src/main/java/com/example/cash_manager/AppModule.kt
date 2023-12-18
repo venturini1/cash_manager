@@ -11,8 +11,8 @@
 //import javax.inject.Singleton
 //
 //
-//@InstallIn(SingletonComponent::class)
 //@Module
+//@InstallIn(SingletonComponent::class)
 //object AppModules {
 //
 //    @Singleton
