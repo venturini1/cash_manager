@@ -7,6 +7,7 @@ import com.android.volley.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class App : Application(), ImageLoaderFactory {
 
     override fun newImageLoader(): ImageLoader {

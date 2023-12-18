@@ -4,9 +4,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    id("com.google.gms.google-services")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
+
 }
 
 android {
@@ -114,8 +114,9 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.5")
     implementation("io.coil-kt:coil-compose:2.5.0")
 
-    implementation("com.google.dagger:hilt-android:2.48.1")
+    //implementation("com.google.dagger:hilt-android:2.48.1")
     //kapt("com.google.dagger:hilt-android-compiler:2.45")
+
     //kapt("androidx.hilt:hilt-compiler:1.1.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 

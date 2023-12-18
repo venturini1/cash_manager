@@ -58,17 +58,19 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 
-@AndroidEntryPoint
 class Scan : ComponentActivity() {
 
+    //@Inject
+    lateinit var barcodeScanner: BarcodeScanner
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Cash_managerTheme {
                 val context = LocalContext.current
-                val barcodeScanner = BarcodeScanner(context)
+                 barcodeScanner = BarcodeScanner(context)
                 val barcodeResults = barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
 
                 ScanBarcode(
@@ -76,8 +78,8 @@ class Scan : ComponentActivity() {
                     barcodeResults.value
                 )
 
-                //val navController = rememberNavController()
-               //ScanPage(navController = navController)
+                val navController = rememberNavController()
+               ScanPage(navController = navController)
             }
         }
     }
@@ -150,10 +152,10 @@ private fun ScanBarcode(
 ) {
     val scope = rememberCoroutineScope()
 
+
     Column(
         modifier = Modifier
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
 
@@ -164,6 +166,7 @@ private fun ScanBarcode(
                 containerColor = Color.Red
             ),
             onClick = {
+                println("bonjour")
                 scope.launch {
                     onScanBarcode()
                 }
