@@ -25,7 +25,36 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
+suspend fun get_dataa(): String {
+    val client = HttpClient()
+
+    val response: HttpResponse = client.get("http://13.36.64.65/api/products/12").body()
+    val datar = response.bodyAsText()
+    //1val product = response.body<Products>()
+
+    val res = Json.encodeToString(datar)
+    val result = res.split("\\", ",")
+    val result1 = result[6].drop(1)
+    // Access the "name" field from the data class
+
+    // Print and return the name
+    println(res[5])
+    println(res)
+    println(result)
+    println(result[6])
+    //println(result1[5])
+    println(datar)
+    client.close()
+    return result1
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +64,14 @@ fun HistoryListe(
     var isListVisible1 by remember { mutableStateOf(false) }
     var isListVisible2 by remember { mutableStateOf(false) }
     var isListVisible3 by remember { mutableStateOf(false) }
+    var responseData by remember { mutableStateOf<String?>(null) }
 
+    LaunchedEffect(true) {
+        // Launch a coroutine to call the suspending function
+        val productData = get_data()
+        responseData = productData
+
+    }
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
@@ -43,6 +79,7 @@ fun HistoryListe(
         horizontalAlignment = Alignment.CenterHorizontally,
 
     ) {
+
         // Add the first list
         item {
             Text(
@@ -91,7 +128,7 @@ fun HistoryListe(
         if (isListVisible2) {
             // Add items for the second list
             item {
-                Text(text = "Yaourt")
+                responseData?.let { Text(text = it) }
             }
             item {
                 Text(text = "Pomme 1")
