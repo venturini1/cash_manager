@@ -5,7 +5,7 @@ services:
 
 before_install:
   - pwd
-  
+  - cd ..
 
 jobs:
   include:
@@ -19,7 +19,8 @@ jobs:
     - stage: frontend tests
       name: "Run Front tests"
       script:
-        - cd ../pageTelechargement 
+        - cd ..
+        - cd pageTelechargement 
         - docker build -t symfony-front . 
         #- docker run image-app npm #run test
 
