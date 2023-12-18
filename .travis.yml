@@ -33,5 +33,6 @@ jobs:
       name: "Docker-compose deployment"
       script:
         - cd ..
-        - docker-compose up -d 
+        - pwd
+        - docker-compose up 
        
