@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  symfony-db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cashmanager
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+
+  symfony-api:
+    build:
+      context: ./InventAPI   # Spécifiez le chemin vers le répertoire du Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "80:8000"
+    depends_on:
+      - symfony-db
+  
+  symfony-front:
+    build:
+      context: ./pageTelechargement   # Spécifiez le chemin vers le répertoire du Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    
+    
