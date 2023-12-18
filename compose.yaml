@@ -13,7 +13,7 @@ services:
 
   symfony-api:
     build:
-      context: ./InventAPI   # Spécifiez le chemin vers le répertoire du Dockerfile
+      context: ./InventApi   # Spécifiez le chemin vers le répertoire du Dockerfile
       dockerfile: Dockerfile
     ports:
       - "80:8000"
