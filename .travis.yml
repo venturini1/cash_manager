@@ -34,5 +34,7 @@ jobs:
       script:
         - cd ..
         - pwd
+        - ls
         - docker-compose up 
-       
+        - while sleep 180; do echo "Building..."; done &
+        - kill %1
