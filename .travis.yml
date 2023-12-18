@@ -22,8 +22,8 @@ jobs:
         - docker build -t symfony-front . 
         #- docker run image-app npm #run test
 
-     - stage: Databases
-      name: "Run MYsql Databases tests"
+    - stage: Databases
+      name: "Run MySQL Databases tests"
       script:
         - cd .. 
         - docker build -t symfony-db . 
