@@ -2,7 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="PreviewScanBarcode (2)">
+      <entry key="IndexPageAdminPreview">
+        <State />
+      </entry>
+      <entry key="IndexPagePreview">
         <State />
       </entry>
       <entry key="app">
