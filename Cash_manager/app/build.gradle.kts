@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+//    id("kotlin-kapt")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
-
+    kotlin("kapt")
 }
 
 android {
@@ -134,5 +135,18 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.0")
     implementation("io.ktor:ktor-client-android:2.3.0")
     implementation("io.ktor:ktor-client-logging:2.3.0")
+
+    implementation("com.google.dagger:hilt-android:2.49")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    kapt("com.google.dagger:hilt-compiler:2.49")
+    kapt("androidx.hilt:hilt-compiler:1.1.0")
+
+    // For instrumentation tests
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.49")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.49")
+
+    // For local unit tests
+    testImplementation("com.google.dagger:hilt-android-testing:2.49")
+    kaptTest("com.google.dagger:hilt-compiler:2.49")
 }
 

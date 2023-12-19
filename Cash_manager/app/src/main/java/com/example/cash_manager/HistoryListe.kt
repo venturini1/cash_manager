@@ -33,18 +33,26 @@ import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-suspend fun get_dataa(): String {
+suspend fun get_dataa(): List<String> {
     val client = HttpClient()
 
     val response: HttpResponse = client.get("http://13.36.64.65/api/products/12").body()
+    val responser: HttpResponse = client.get("http://13.36.64.65/api/products/11").body()
+
     val datar = response.bodyAsText()
+    val datar1 = responser.bodyAsText()
     //1val product = response.body<Products>()
+
+    val res1 = Json.encodeToString(datar1)
+    val resulte = res1.split("\\", ",")
+    val result3 = resulte[6].drop(1)
 
     val res = Json.encodeToString(datar)
     val result = res.split("\\", ",")
     val result1 = result[6].drop(1)
     // Access the "name" field from the data class
 
+    val lister = listOf(result1, result3)
     // Print and return the name
     println(res[5])
     println(res)
@@ -53,7 +61,7 @@ suspend fun get_dataa(): String {
     //println(result1[5])
     println(datar)
     client.close()
-    return result1
+    return lister
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,11 +73,15 @@ fun HistoryListe(
     var isListVisible2 by remember { mutableStateOf(false) }
     var isListVisible3 by remember { mutableStateOf(false) }
     var responseData by remember { mutableStateOf<String?>(null) }
+    var responseData1 by remember { mutableStateOf<String?>(null) }
+
 
     LaunchedEffect(true) {
         // Launch a coroutine to call the suspending function
-        val productData = get_data()
-        responseData = productData
+        val productData = get_dataa()
+        responseData = productData[0]
+        responseData1 = productData[1]
+        //mutableList[1] = responseData
 
     }
     LazyColumn(
@@ -131,7 +143,7 @@ fun HistoryListe(
                 responseData?.let { Text(text = it) }
             }
             item {
-                Text(text = "Pomme 1")
+                responseData1?.let { Text(text = it) }
             }
             item {
                 Text(text = "Pomme 2")
