@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -25,65 +26,53 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
 fun IndexAdminTextField(
     label: String,
     placeholder: String,
-    modifier : Modifier = Modifier,
-    ){
+    modifier: Modifier = Modifier,
+) {
 
     var textFieldValue by remember { mutableStateOf("") }
     var isHided by remember { mutableStateOf(true) }
 
-
-
     Column(
         modifier = modifier,
-        ) {
+    ) {
         Text(
             modifier = Modifier.padding(bottom = 16.dp),
             text = label,
             fontWeight = FontWeight.SemiBold,
-            )
+        )
         TextField(
-
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(30.dp),
             value = textFieldValue,
             onValueChange = {
-
                 textFieldValue = it
-
             },
-
             placeholder = {
                 Text(text = placeholder)
-
             },
-
             trailingIcon = {
 
             },
-
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color(0xF128128128),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
-                )
+            )
 
         )
-
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -91,6 +80,7 @@ fun IndexAdminTextField(
 fun AdminRectangleWithText() {
     var name by remember { mutableStateOf("Name Product") }
     var price by remember { mutableStateOf("Price") }
+    var codeBarre by remember { mutableStateOf("Code Barre") }
 
     Box(
         modifier = Modifier
@@ -125,12 +115,11 @@ fun AdminRectangleWithText() {
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                 )
-
             )
             Divider(modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 0.dp))
-            // Partie basse : Prix
+            // Partie centrale : Prix
             TextField(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -145,8 +134,29 @@ fun AdminRectangleWithText() {
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
-                )
-
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+            )
+            Divider(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 0.dp))
+            // Partie basse : Code Barre
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                value = codeBarre,
+                onValueChange = { newCodeBarre -> codeBarre = newCodeBarre },
+                textStyle = TextStyle(
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                ),
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
             )
         }
     }
@@ -160,14 +170,11 @@ fun AdminRectangleWithTextPreview() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun IndexAdminTextFieldPreview(){
-
+fun IndexAdminTextFieldPreview() {
     IndexAdminTextField(
         label = "Code Barre",
         placeholder = "0173291302718",
-        )
-
+    )
 }
