@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction0
@@ -129,29 +130,14 @@ fun IndexAdminPage(navController: NavController){
 //    }
 //}
 
-//@Preview(showBackground = true)
-//@Composable
-//fun IndexPageAdminPreview() {
-//    Cash_managerTheme() {
-//        IndexAdminPage()
-//    }
-//}
-
-
-
-/*
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Cash_managerTheme {
-        LoginPage()
+fun IndexPageAdminPreview() {
+    val navController = rememberNavController()
+    Cash_managerTheme() {
+        IndexAdminPage(navController = navController)
     }
 }
 
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp", showSystemUi = true)
-@Composable
-fun GreetingPreviewDark() {
-    Cash_managerTheme(darkTheme = true) {
-        LoginPage()
-    }
-}*/
+
+
