@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -52,42 +51,27 @@ fun IndexAdminTextField(
             text = label,
             fontWeight = FontWeight.SemiBold,
         )
-
-        Row(
+        TextField(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Texte de l'IndexAdminTextField
-            TextField(
-                modifier = Modifier.weight(1f),
-                shape = RoundedCornerShape(30.dp),
-                value = textFieldValue,
-                onValueChange = {
-                    textFieldValue = it
-                },
-                placeholder = {
-                    Text(text = placeholder)
-                },
-                trailingIcon = {
+            shape = RoundedCornerShape(30.dp),
+            value = textFieldValue,
+            onValueChange = {
+                textFieldValue = it
+            },
+            placeholder = {
+                Text(text = placeholder)
+            },
+            trailingIcon = {
 
-                },
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color(0xF128128128),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                ),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
-            )
-
-            // Symbole €
-            Text(
-                text = "€",
-                modifier = Modifier.padding(start = 8.dp),
-                fontSize = 20.sp
-            )
-        }
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color(0xF128128128),
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+            ),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+        )
     }
 }
 
