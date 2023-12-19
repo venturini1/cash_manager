@@ -8,6 +8,7 @@ plugins {
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
