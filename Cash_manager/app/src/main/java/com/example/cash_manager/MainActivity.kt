@@ -1,5 +1,6 @@
 package com.example.cash_manager
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,30 +31,33 @@ class MainActivity : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                MainContent()
+                MainContent(this)
             }
         }
     }
 }
 
 @Composable
-fun MainContent() {
+fun MainContent(context: Context) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginPage(navController = navController) }
-        composable("scan") { ScanPage(navController = navController) }
+            //  composable("scan") { ScanPage(navController = navController) }
         composable("index") { IndexPage(navController = navController) }
         composable("history") { HistoryPage(navController = navController) }
         composable("account") { AccountPage(navController = navController) }
-
+        composable("scan") {
+            val barcodeScanner = BarcodeScanner(context) // Create an instance of the BarcodeScanner
+            ScanPage(navController = navController, barcodeScanner = barcodeScanner)
+        }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MainContentPreview() {
-    Cash_managerTheme {
-        MainContent()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun MainContentPreview() {
+//    Cash_managerTheme {
+//        MainContent()
+//    }
+//}

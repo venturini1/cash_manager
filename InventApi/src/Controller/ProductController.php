@@ -26,7 +26,7 @@ class ProductController extends AbstractController
     }
 
     // GET ONE MEHODE
-    #[Route('/api/products/{id}', name: 'detailProduct', methods: ['GET'])]
+    #[Route('/api/products/code/{id}', name: 'detailProduct', methods: ['GET'])]
     public function getDetailProduct(int $id, SerializerInterface $serializer, ProductRepository $productRepository): JsonResponse
     {
         $product = $productRepository->find($id);
@@ -37,6 +37,17 @@ class ProductController extends AbstractController
         }
 
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+    }
+
+    // GET ONE BY CODE
+    #[Route('/api/products/code/{code}', name: 'ProductsByCode', methods: ['GET'])]
+    public function getBillsByUser(int $code, SerializerInterface $serializer, ProductRepository $productRepository): JsonResponse
+    {
+        $product = $productRepository->findBy(['code' => $code]);
+
+        $jsonProduct = $serializer->serialize($product, 'json');
+
+        return new JsonResponse($jsonProduct, Response::HTTP_OK, [], true);
     }
 
     // DELETE METHOD
@@ -79,5 +90,5 @@ class ProductController extends AbstractController
         $em->flush();
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
-    } 
+    }
 }
