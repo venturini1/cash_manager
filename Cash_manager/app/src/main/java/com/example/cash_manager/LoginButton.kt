@@ -37,7 +37,7 @@ fun LoginButton(
             containerColor = Color(0xFF728963),
         ),
         onClick = {
-            onClick() // Appel de la fonction lambda passée en paramètre
+            onClick()// Appel de la fonction lambda passée en paramètre
             // Naviguer vers la page d'index lorsque le bouton de connexion est cliqué
             navController.navigate("scan")
         }
