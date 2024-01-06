@@ -1,5 +1,6 @@
 package com.example.cash_manager
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -45,28 +47,28 @@ import io.ktor.client.statement.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 
 class Scan : ComponentActivity() {
 
-    //@Inject
     lateinit var barcodeScanner: BarcodeScanner
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        barcodeScanner = BarcodeScanner(this)
         setContent {
             Cash_managerTheme {
-                val context = LocalContext.current
-                 barcodeScanner = BarcodeScanner(context)
-                val barcodeResults = barcodeScanner.barCodeResults.collectAsStateWithLifecycle()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    ScanPage(navController = navController, barcodeScanner)
 
-                ScanBarcode(
-                    barcodeScanner::startScan,
-                    barcodeResults.value
-                )
+                    }
+                }
+//                val context = LocalContext.current
 
-                val navController = rememberNavController()
-               ScanPage(navController = navController)
-            }
         }
     }
 }
@@ -98,7 +100,7 @@ suspend fun get_data(): String {
 }
 
 @Composable
-fun ScanPage(navController: NavController) {
+fun ScanPage(navController: NavController, barcodeScanner: BarcodeScanner) {
 
     var responseData by remember { mutableStateOf<String?>(null) }
     val product = Products(id = 11, name = "Product 0", price = 53.0, code = 19)
@@ -114,7 +116,6 @@ fun ScanPage(navController: NavController) {
         responseData = productData
 
     }
-
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -124,61 +125,27 @@ fun ScanPage(navController: NavController) {
                 .fillMaxWidth(),
             navController = navController
         )
-
-        ScanBarcode({
-            save1
-        }, save2)
+            // ScanBarcode({}, null)
         Text("Response Data: $responseData")
-
-//        CodeCard(
-//            jsonStr = "{\n" +
-//                    "  id: 101,\n" +
-//                    "  title: 'foo',\n" +
-//                    "  body: 'bar',\n" +
-//                    "  userId: 1\n" +
-//                    "}"
-//        )
-
-        // Call the ScanBarcode composable function
-
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ScanPagePreview() {
-    val navController = rememberNavController()
-    Cash_managerTheme() {
-        ScanPage(navController = navController)
+    var valueScanned by remember {
+        mutableStateOf("")
     }
-}
-
-@Composable
-private fun ScanBarcode(
-    onScanBarcode: suspend () -> Unit,
-    barcodeValue: String?
-) {
     val scope = rememberCoroutineScope()
-
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center
-    ) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .padding(32.dp)) {
+        Text(text = valueScanned, modifier = Modifier.align(Alignment.Center))
 
         Button(
-            modifier = Modifier
-                .fillMaxWidth(.85f),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Red
-            ),
+
             onClick = {
-                println("bonjour")
                 scope.launch {
-                    onScanBarcode()
+                    valueScanned = barcodeScanner.startScan().toString()
                 }
-            }) {
+            },
+            modifier = Modifier.align(Alignment.Center)
+        ) {
             Text(
                 text = "Scan Barcode",
                 textAlign = TextAlign.Center,
@@ -191,25 +158,85 @@ private fun ScanBarcode(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = barcodeValue ?: "0000000000",
+            text = valueScanned ?: "0000000000",
             style = MaterialTheme.typography.displayMedium,
             color = Color.Black
         )
+
     }
 }
 
-@Preview
-@Composable
-fun PreviewScanBarcode() {
-    Cash_managerTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Color.White
-        ) {
-            ScanBarcode({}, null)
-
-   //         IndexAdminPage()
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ScanPagePreview() {
+//    val navController = rememberNavController()
+//    Cash_managerTheme() {
+//        ScanPage(navController = navController)
+//    }
+//}
+//
+//@SuppressLint("CoroutineCreationDuringComposition")
+//@Composable
+// fun ScanBarcode(
+//    onScanBarcode: suspend () -> Unit,
+//    barcodeValue: String?
+//) {
+//    var valuescanned by remember {
+//        mutableStateOf("")
+//    }
+//    val scope = rememberCoroutineScope()
+//    Column(
+//        modifier = Modifier
+//            .fillMaxSize(),
+//        verticalArrangement = Arrangement.Center
+//    ) {
+//
+//        scope.launch {
+//            onScanBarcode()
+//        }
+//        Button(
+//            modifier = Modifier
+//                .fillMaxWidth(.85f),
+//            colors = ButtonDefaults.buttonColors(
+//                containerColor = Color.Red
+//            ),
+//            onClick = {
+//                println("bonjour")
+//                scope.launch {
+//                    onScanBarcode()
+//                }
+//            }) {
+//            Text(
+//                text = "Scan Barcode",
+//                textAlign = TextAlign.Center,
+//                style = MaterialTheme.typography.displayMedium,
+//                color = Color.White
+//                //style = TextStyle(fontWeight = FontWeight.Bold)
+//            )
+//        }
+//
+//        Spacer(modifier = Modifier.height(20.dp))
+//
+//        Text(
+//            text = barcodeValue ?: "0000000000",
+//            style = MaterialTheme.typography.displayMedium,
+//            color = Color.Black
+//        )
+//    }
+//}
+//
+//@Preview
+//@Composable
+//fun PreviewScanBarcode() {
+//    Cash_managerTheme {
+//        // A surface container using the 'background' color from the theme
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = Color.White
+//        ) {
+//            ScanBarcode({}, null)
+//
+//   //         IndexAdminPage()
+//        }
+//    }
+//}
