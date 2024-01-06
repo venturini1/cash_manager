@@ -24,7 +24,7 @@ class ProductController extends AbstractController
         $jsonProductList = $serializer->serialize($productList, 'json');
         return new JsonResponse($jsonProductList, Response::HTTP_OK, [], true);
     }
-
+/*
     // GET ONE MEHODE
     #[Route('/api/products/code/{id}', name: 'detailProduct', methods: ['GET'])]
     public function getDetailProduct(int $id, SerializerInterface $serializer, ProductRepository $productRepository): JsonResponse
@@ -38,7 +38,7 @@ class ProductController extends AbstractController
 
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
-
+*/
     // GET ONE BY CODE
     #[Route('/api/products/code/{code}', name: 'ProductsByCode', methods: ['GET'])]
     public function getBillsByUser(int $code, SerializerInterface $serializer, ProductRepository $productRepository): JsonResponse
