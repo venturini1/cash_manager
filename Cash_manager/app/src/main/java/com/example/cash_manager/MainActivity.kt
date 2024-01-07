@@ -43,7 +43,7 @@ fun MainContent(context: Context) {
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginPage(navController = navController) }
-            //  composable("scan") { ScanPage(navController = navController) }
+        composable("signup") { SignUpPage(navController = navController) }
         composable("index") { IndexPage(navController = navController) }
         composable("history") { HistoryPage(navController = navController) }
         composable("account") { AccountPage(navController = navController) }

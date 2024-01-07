@@ -97,7 +97,11 @@ fun LoginPage(navController: NavController) {
         Spacer(modifier = Modifier.size(30.dp))
         LoginClickableText(
             modifier = Modifier.align(CenterHorizontally),
-            text = buildCreateAccountAnnotatedString()
+            text = buildCreateAccountAnnotatedString(),
+            onClick = {
+                // Actions à effectuer lors du clic sur le bouton (si nécessaire)
+            },
+            navController = navController
         )
     }
 }
