@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class SignUp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +38,6 @@ class SignUp : ComponentActivity() {
 
 @Composable
 fun SignUpPage(navController: NavController){
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,8 +87,11 @@ fun SignUpPage(navController: NavController){
             modifier = Modifier.align(CenterHorizontally),
             text= "Back",
             text1= "Create",
+            onClick = {
+                // Actions à effectuer lors du clic sur le bouton (si nécessaire)
+            },
+            navController = navController
         )
-
     }
 }
 
