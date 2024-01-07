@@ -21,16 +21,15 @@ public class BarcodeScanner(
     private val scanner = GmsBarcodeScanning.getClient(appContext, options)
     val barCodeResults = MutableStateFlow<String?>(null)
 
-    suspend fun startScan() {
-        try {
-            scanner.startScan()
-                .addOnSuccessListener { barcode ->
-                    barCodeResults.value = barcode.displayValue
-                }
+    suspend fun startScan() : String? {
+        return try {
 //            val result = scanner.startScan().await()
 //            barCodeResults.value = result.rawValue
 //            Timber.d(barCodeResults.value)
+             scanner.startScan().await().rawValue.toString()
         } catch (e: Exception) {
+       //     Timber.d("scan error: ${e.message}")
+            null
         }
     }
 }
