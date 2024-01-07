@@ -18,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 
 class SignUp : ComponentActivity() {
@@ -26,14 +28,15 @@ class SignUp : ComponentActivity() {
         setContent {
             Cash_managerTheme {
                 // A surface container using the 'background' color from the theme
-                SignUpPage()
+                val navController = rememberNavController()
+                SignUpPage(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun SignUpPage(){
+fun SignUpPage(navController: NavController){
 
     Column(
         modifier = Modifier
@@ -92,8 +95,10 @@ fun SignUpPage(){
 @Preview(showBackground = true)
 @Composable
 fun SignUpPagePreview() {
+    val navController = rememberNavController()
+
     Cash_managerTheme() {
-        SignUpPage()
+        SignUpPage(navController = navController)
     }
 }
 

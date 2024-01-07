@@ -12,16 +12,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
 fun LoginClickableText(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    navController: NavController
 ){
     ClickableText(
         modifier = modifier,
         text = text ,
-        onClick = {})
+        onClick = {
+            onClick()
+            navController.navigate("Signup")
+        })
 }
 /*
 @Preview(showBackground = true)
