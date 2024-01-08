@@ -6,11 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import com.example.cash_manager.ui.theme.Cash_managerTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,13 @@ fun MainContent(context: Context) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginPage(navController = navController) }
         composable("signup") { SignUpPage(navController = navController) }
-        composable("index") { IndexPage(navController = navController) }
+        composable(
+            "index/{responseData}",
+            arguments = listOf(navArgument("responseData") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val responseData = backStackEntry.arguments?.getString("responseData")
+            IndexPage(navController, responseData)
+        }
         composable("history") { HistoryPage(navController = navController) }
         composable("account") { AccountPage(navController = navController) }
         composable("scan") {
