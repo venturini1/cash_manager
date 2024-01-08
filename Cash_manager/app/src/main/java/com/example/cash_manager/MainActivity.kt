@@ -4,26 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
 
-import androidx.compose.foundation.layout.Column
-
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.BottomCenter
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import com.example.cash_manager.ui.theme.Cash_managerTheme
-import androidx.compose.material3.MaterialTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +32,13 @@ fun MainContent(context: Context) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginPage(navController = navController) }
         composable("signup") { SignUpPage(navController = navController) }
-        composable("index") { IndexPage(navController = navController) }
+        composable(
+            "index/{responseData}",
+            arguments = listOf(navArgument("responseData") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val responseData = backStackEntry.arguments?.getString("responseData")
+            IndexPage(navController, responseData)
+        }
         composable("history") { HistoryPage(navController = navController) }
         composable("account") { AccountPage(navController = navController) }
         composable("scan") {

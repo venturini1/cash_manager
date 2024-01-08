@@ -103,11 +103,11 @@ fun AccountPage(navController: NavController){
             isPassword = true,
         )
         Spacer(modifier = Modifier.size(50.dp))
-        SignUpButton(
-            modifier = Modifier.align(CenterHorizontally),
-            text= "Back",
-            text1= "Save",
-        )
+//        SignUpButton(
+//            modifier = Modifier.align(CenterHorizontally),
+//            text= "Back",
+//            text1= "Save",
+//        )
     }
         BottomButton(
             modifier = Modifier

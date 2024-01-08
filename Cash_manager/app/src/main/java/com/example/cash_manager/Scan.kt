@@ -34,19 +34,28 @@ import com.example.cash_manager.ui.theme.Cash_managerTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.api.Context
 import io.ktor.client.*
 import io.ktor.client.call.body
 
 import kotlinx.coroutines.launch
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.math.BigInteger
 import javax.inject.Inject
 
 
@@ -73,13 +82,31 @@ class Scan : ComponentActivity() {
     }
 }
 
-@Serializable
-data class Products(val id: Int, val name: String, val price: Double, val code: Int)
 
-suspend fun get_data(): String {
+// Create a DataStore instance
+//val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+//
+//object DataStoreKeys {
+//    val RESPONSE_DATA = stringPreferencesKey("response_data")
+//}
+//
+//// Function to save responseData to DataStore
+//suspend fun saveResponseDataToDataStore(context: Context, responseData: String) {
+//    context.dataStore.edit { preferences ->
+//        preferences[DataStoreKeys.RESPONSE_DATA] = responseData
+//    }
+//}
+//
+//// Function to get responseData from DataStore
+//fun getResponseDataFromDataStore(context: Context): Flow<String?> {
+//    return context.dataStore.data.map { preferences ->
+//        preferences[DataStoreKeys.RESPONSE_DATA]
+//    }
+//}
+suspend fun get_data(bigIntParameter: BigInteger): String {
     val client = HttpClient()
 
-    val response: HttpResponse = client.get("http://13.36.64.65/api/products/12").body()
+    val response: HttpResponse = client.get("http://13.36.64.65/api/products/code/${bigIntParameter}").body()
     val datar = response.bodyAsText()
     //1val product = response.body<Products>()
 
@@ -103,17 +130,11 @@ suspend fun get_data(): String {
 fun ScanPage(navController: NavController, barcodeScanner: BarcodeScanner) {
 
     var responseData by remember { mutableStateOf<String?>(null) }
-    val product = Products(id = 11, name = "Product 0", price = 53.0, code = 19)
+    var responsesData by remember { mutableStateOf<BigInteger?>(null) }
 
-    // Access fields of the Product instance
-    val productId = product.id
-    val productName = product.name
-    val productPrice = product.price
-    val productCode = product.code
     LaunchedEffect(true) {
         // Launch a coroutine to call the suspending function
-        val productData = get_data()
-        responseData = productData
+
 
     }
     Box(
@@ -126,7 +147,6 @@ fun ScanPage(navController: NavController, barcodeScanner: BarcodeScanner) {
             navController = navController
         )
             // ScanBarcode({}, null)
-        Text("Response Data: $responseData")
     }
     var valueScanned by remember {
         mutableStateOf("")
@@ -142,8 +162,17 @@ fun ScanPage(navController: NavController, barcodeScanner: BarcodeScanner) {
             onClick = {
                 scope.launch {
                     valueScanned = barcodeScanner.startScan().toString()
+                    responsesData = valueScanned.toBigInteger()
+                    val productData = get_data(responsesData!!)
+                    responseData = productData
+                    val route = "index/$responseData"
+                    navController.navigate(route)
+                   // navController.navigate("index/{responseData}")
+
                 }
+
             },
+
             modifier = Modifier.align(Alignment.Center)
         ) {
             Text(
@@ -154,14 +183,15 @@ fun ScanPage(navController: NavController, barcodeScanner: BarcodeScanner) {
                 //style = TextStyle(fontWeight = FontWeight.Bold)
             )
         }
+        Text("Response Data: $responseData")
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text(
-            text = valueScanned ?: "0000000000",
-            style = MaterialTheme.typography.displayMedium,
-            color = Color.Black
-        )
+//        Text(
+//            text = valueScanned ?: "0000000000",
+//            style = MaterialTheme.typography.displayMedium,
+//            color = Color.Black
+//        )
 
     }
 }
