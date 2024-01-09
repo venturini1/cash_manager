@@ -213,7 +213,7 @@ fun PayButton(
                 contentColor = Color.White,
             ),
             onClick = {
-                localUriHandler.openUri("https://buy.stripe.com/4gw9AW9d52zi90s000")
+                localUriHandler.openUri("https://buy.stripe.com/28o5od3Fsb7k6iYfYY")
             }
         ) {
             Text(text = text)
